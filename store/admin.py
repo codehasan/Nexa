@@ -110,6 +110,7 @@ class CustomerFilter(admin.SimpleListFilter):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["user"]
     list_display = [
         "user__first_name",
         "user__last_name",
