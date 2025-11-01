@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      margin: 10px 20px 0px 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    table thead tr {
+      background-color: #009879;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    table th,
+    table td {
+      padding: 12px 15px;
+    }
+
+    table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    table tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
+    table tbody tr.active-row {
+      font-weight: bold;
+      color: #009879;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Total {{data|length}} data</h1>
+  {% if data|length > 0 %}
+  <table>
+    <thead>
+      <th>id</th>
+      {% for field, value in data.0.fields.items %}
+      <th>
+        {{ field }}
+      </th>
+      {% endfor %}
+    </thead>
+    <tbody>
+      {% for instance in data %}
+      <tr>
+        <td>{{ instance.pk }}</td>
+        {% for field, value in instance.fields.items %}
+        <td>
+          {{ value }}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</body>
+
+</html>
