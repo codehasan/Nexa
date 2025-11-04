@@ -8,6 +8,8 @@ router = SimpleRouter()
 router.register(r"products", views.ProductViewSet, basename="product")
 router.register(r"collections", views.CollectionViewSet, basename="collection")
 router.register(r"carts", views.CartViewSet, basename="cart")
+router.register(r"customers", views.CustomerViewSet, basename="customer")
+router.register(r"orders", views.OrderViewSet, basename="order")
 
 product_router = NestedSimpleRouter(router, r"products", lookup="product")
 product_router.register(
