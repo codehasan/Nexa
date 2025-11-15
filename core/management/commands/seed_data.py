@@ -102,27 +102,25 @@ class Command(BaseCommand):
                 collection.featured_product = random.choice(products)
                 collection.save()
 
-        # Create Customers
-        customers = []
-        for user in users:
-            customer = Customer.objects.create(
-                phone=fake.phone_number()[
-                    :50
-                ],  # Ensure phone number fits in 50 chars
-                birth_date=fake.date_of_birth(minimum_age=18, maximum_age=90),
-                membership=random.choice(
-                    [
-                        Customer.MEMBERSHIP_BRONZE,
-                        Customer.MEMBERSHIP_SILVER,
-                        Customer.MEMBERSHIP_GOLD,
-                    ]
-                ),
-                user=user,
-            )
-            customers.append(customer)
+        # Retrieve Customers
+        # Customer is created by signal when User is created
+        customers = Customer.objects.all()
 
-        # Create Addresses for Customers (OneToOne relationship)
+        # Update Customers and create Addresses
         for customer in customers:
+            customer.phone = fake.phone_number()
+            customer.birth_date = fake.date_of_birth(
+                minimum_age=18, maximum_age=90
+            )
+            customer.membership = random.choice(
+                [
+                    Customer.MEMBERSHIP_BRONZE,
+                    Customer.MEMBERSHIP_SILVER,
+                    Customer.MEMBERSHIP_GOLD,
+                ]
+            )
+            customer.save()
+
             Address.objects.create(
                 street=fake.street_address(),
                 city=fake.city(),
