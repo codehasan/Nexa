@@ -16,7 +16,7 @@ A production-ready RESTful e-commerce backend built with **Django** and **Django
 ## 🏗️ Tech Stack
 
 **Backend:** Django 5.2+ | **API:** Django REST Framework | **Auth:** JWT (djangorestframework-simplejwt)  
-**Database:** MySQL 8.0+ | **Routing:** drf-nested-routers | **Filtering:** django-filter
+**Database:** MySQL 8.0+ | **Routing:** drf-nested-routers | **Filtering:** django-filter | **Config:** python-dotenv
 
 ## 🚀 Quick Start
 
@@ -25,13 +25,19 @@ A production-ready RESTful e-commerce backend built with **Django** and **Django
 git clone https://github.com/codehasan/Nexa.git && cd Nexa
 pip install -r requirements.txt
 
-# Configure database in nexa/settings.py, then:
+# Setup environment variables
+cp .env.example .env
+# Edit .env with your database credentials and settings
+
+# Run migrations & start server
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
 
 Server runs at `http://localhost:8000`
+
+**Note:** All sensitive configuration is managed via `.env` file (see `.env.example` for template)
 
 ---
 
